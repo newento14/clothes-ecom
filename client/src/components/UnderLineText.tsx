@@ -26,7 +26,7 @@ const UnderLineText = ({ text }: Props) => {
             exit={{ width: "0" }}
             transition={{ type: "spring", duration: 0.8 }}
 
-            className="absolute -bottom-2 bg-gray-400 w-full h-[3px] rounded-xl"
+            className="absolute -bottom-1 bg-gray-400 w-full h-[3px] rounded-xl"
           />
 
         }

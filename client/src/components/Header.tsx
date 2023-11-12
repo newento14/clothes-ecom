@@ -7,7 +7,7 @@ import UnderLineText from "@/components/UnderLineText";
 const Header = () => {
   return (
     <nav
-      className={`w-full h-[80px] text-[#979797] absolute bg-[#141414] flex justify-between items-center px-12 max-lg:px-2`}>
+      className={`w-full h-[80px] text-[#979797] fixed bg-[#141414] flex justify-between items-center px-12 max-lg:px-2`}>
       <div className="w-full flex justify-center items-center border-r-[3px] border-black max-w-[250px]">
         <div className={`flex items-center justify-center`}>
           <Image className="w-[80px]" src={logo} alt="logo" />
@@ -49,20 +49,20 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      <div className="w-full flex justify-center items-center border-r-[3px] border-black h-full max-w-[450px]">
+      <div className="w-full flex justify-center items-center border-r-[3px] border-black h-full max-w-[400px]">
         <div className={`flex gap-x-8`}>
           <div className="bg-[#090909] p-4">
-            <FiSearch />
+            <FiSearch color={'white'} />
           </div>
           <div className="bg-[#090909] p-4">
-            <FiBell />
+            <FiBell color={'white'} />
           </div>
           <div className="bg-[#090909] p-4">
-            <FiShoppingCart />
+            <FiShoppingCart color={'white'} />
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-center items-center max-w-[350px]">
+      <div className="w-full flex justify-center items-center max-w-[300px]">
         <div>
           <UnderLineText text={"Log in"} />
         </div>
