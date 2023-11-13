@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export const $axios = axios.create({
   baseURL: process.env.SERVER_URL,

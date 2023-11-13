@@ -1,15 +1,15 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { ProductsService } from './products.service';
 import { CreateProductDto } from "./dto/createProduct.dto";
-import { sortType } from "./sort.type";
+import { clotheType, sortType } from "./sort.type";
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  findAllWithSort(@Query('sortType') type?: sortType) {
-    return this.productsService.findAll(type);
+  findAllWithSort( @Query('type') clotheType: clotheType, @Query('sortType') type?: sortType ) {
+    return this.productsService.findAll(clotheType, type);
   }
 
   @Get('search')

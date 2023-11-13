@@ -1,12 +1,14 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface Props {
-  text: string;
+  children: React.ReactNode;
+  color: string;
+  height: number;
 }
 
-const UnderLineText = ({ text }: Props) => {
+const UnderLineText = ({ children, color, height }: Props) => {
   const [hover, setHover] = useState(false);
 
   return (
@@ -16,17 +18,17 @@ const UnderLineText = ({ text }: Props) => {
       onHoverEnd={() => setHover(false)}
       className="relative"
     >
-      <p>{text}</p>
+      {children}
       <AnimatePresence>
         {hover &&
 
           <motion.div
-            initial={{ width: "0" }}
+            initial={{ width: "0", zIndex: 111 }}
             animate={{ width: "100%" }}
             exit={{ width: "0" }}
             transition={{ type: "spring", duration: 0.8 }}
 
-            className="absolute -bottom-1 bg-gray-400 w-full h-[3px] rounded-xl"
+            className={`absolute -bottom-1 bg-[${color}] w-full h-[${height}px] rounded-xl`}
           />
 
         }

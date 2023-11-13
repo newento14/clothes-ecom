@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from '../prisma.service';
-import { sortType } from "./sort.type";
+import { clotheType, sortType } from "./sort.type";
 
 @Injectable()
 export class ProductsService {
@@ -29,7 +29,7 @@ export class ProductsService {
     );
   }
 
-  async findAll(type?: sortType) {
+  async findAll(clotheType: clotheType, type?: sortType) {
     const isByPrice = type === 'high-to-low' || type === 'low-to-high';
     const isAsc = type === 'oldest' || type === 'low-to-high';
 
@@ -40,6 +40,7 @@ export class ProductsService {
     } as any;
 
     return this.prisma.product.findMany({
+      where: {type: clotheType},
       orderBy,
     });
   }
