@@ -7,13 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ClotheType {
+  men
+  women
+}
+
 model Product {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  name        String   @unique
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  name        String     @unique
   description String
-  slug        String   @unique
+  slug        String     @unique
+  type        ClotheType @default(men)
   price       Int
   images      String[]
   reviews     Review[]

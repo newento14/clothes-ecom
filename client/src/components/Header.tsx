@@ -7,7 +7,7 @@ import UnderLineText from "@/components/UnderLineText";
 const Header = () => {
   return (
     <nav
-      className={`w-full h-[80px] text-[#979797] fixed bg-[#141414] flex justify-between items-center px-12 max-lg:px-2`}>
+      className={`w-full h-[80px] text-[#979797] fixed bg-[#141414] flex justify-between items-center px-12 max-lg:px-2 z-30`}>
       <div className="w-full flex justify-center items-center border-r-[3px] border-black max-w-[250px]">
         <div className={`flex items-center justify-center`}>
           <Image className="w-[80px]" src={logo} alt="logo" />
@@ -36,7 +36,7 @@ const Header = () => {
             <UnderLineText text={"Home"} />
           </Link>
           <Link href={"/shop"}>
-            <UnderLineText text={"Shop"} />
+            <UnderLineText text={"shop"} />
           </Link>
           <Link href={"/"}>
             <UnderLineText text={"Categories"} />
@@ -51,20 +51,22 @@ const Header = () => {
       </div>
       <div className="w-full flex justify-center items-center border-r-[3px] border-black h-full max-w-[400px]">
         <div className={`flex gap-x-8`}>
-          <div className="bg-[#090909] p-4">
-            <FiSearch color={'white'} />
+          <div className="bg-[#090909] p-4 hover:bg-[#94221a]">
+            <FiSearch color={"white"} />
           </div>
-          <div className="bg-[#090909] p-4">
-            <FiBell color={'white'} />
+          <div className="bg-[#090909] p-4 hover:bg-[#94221a]">
+            <FiBell color={"white"} />
           </div>
-          <div className="bg-[#090909] p-4">
-            <FiShoppingCart color={'white'} />
+          <div className="bg-[#090909] p-4 hover:bg-[#94221a]">
+            <FiShoppingCart color={"white"} />
           </div>
         </div>
       </div>
       <div className="w-full flex justify-center items-center max-w-[300px]">
         <div>
-          <UnderLineText text={"Log in"} />
+          <Link href={"/login"}>
+            <UnderLineText text={"Log in"} />
+          </Link>
         </div>
       </div>
     </nav>
