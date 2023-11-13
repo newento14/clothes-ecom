@@ -15,7 +15,7 @@ const Tabs = () => {
   const path = usePathname();
 
   return (
-    <div className={`flex gap-x-6`}>
+    <div className={`flex gap-x-6 px-2`}>
       {links.map(link => (
         <Link key={link.href} className="relative" href={link.href}>
           {((path.includes(link.href) && link.href !== '/') || (path === '/' && link.href === '/')) &&
