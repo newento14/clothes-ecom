@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { UserDto } from "./dto/user.dto";
 import * as bcrypt from 'bcryptjs'
@@ -20,6 +20,11 @@ export class UsersService {
     return user;
   }
 
+  async getById(id: number) {
+    const user = await this.prisma.user.findFirst({where: {id: id}})
+    return user;
+  }
+
   async login(dto: UserDto) {
     const user = await this.getByEmail(dto.email);
     if (!user) {
@@ -28,7 +33,14 @@ export class UsersService {
     if (!await bcrypt.compare(dto.password, user.password)) {
       throw new HttpException('bad password', HttpStatus.BAD_REQUEST);
     }
-    return this.generateToken(user);
+    const token = await this.generateToken(user)
+    return {
+      ...token,
+      user: {
+        id: user.id,
+        email: user.email
+      }
+    };
   }
 
   async registration(dto: UserDto) {
@@ -45,9 +57,30 @@ export class UsersService {
     return user;
   }
 
+  async validateToken(token: string) {
+    try {
+      const decodedToken = this.jwtService.verify(token);
+      const user = await this.getById(decodedToken.id);
+      if (!user) {
+        throw new HttpException('bad password', HttpStatus.BAD_REQUEST);
+      } else {
+        const token = await this.generateToken(user)
+        return {
+          ...token,
+          user: {
+            id: user.id,
+            email: user.email
+          }
+        };
+      }
+    } catch (e) {
+      throw new UnauthorizedException({ message: 'unauthorized' });
+    }
+  }
+
 
   private async generateToken(user: User) {
-    const payload = {id: user.id};
+    const payload = {id: user.id, email: user.email};
     return {token: this.jwtService.sign(payload)}
   }
 }

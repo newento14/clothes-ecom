@@ -6,9 +6,11 @@ import { useState } from "react";
 import CartItem from "@/components/CartItem";
 import { ConvertToCurrency } from "@/utils/convertToCurrency";
 import UnderLineText from "@/components/UnderLineText";
+import Link from "next/link";
 
 const Cart = () => {
   const cart = useTypedSelector(x => x.cart.cart);
+  const isAuth = useTypedSelector(x => x.auth.isAuth)
   const [cartVisible, setCartVisible] = useState(false);
 
   const cartContent = (
@@ -30,7 +32,8 @@ const Cart = () => {
         className="font-semibold text-xl text-white">{ConvertToCurrency(cart.reduce((acc, x) => acc + x.product.price * x.count, 0))}</p>
       <div className="flex justify-center items-center">
         <UnderLineText color="#94221a" height={2}>
-          <p className="text-white">PAYMENT</p>
+          {isAuth ? <p className="text-white">CHECKOUT</p> : <Link href={'/login'} onClick={() => setCartVisible(false)}><p className="text-white">LOGIN TO CHECKOUT</p></Link> }
+
           <div className="absolute -bottom-1 w-full h-[1px] bg-[#ffffff] z-10" />
         </UnderLineText>
       </div>
@@ -43,7 +46,7 @@ const Cart = () => {
         <FiShoppingCart color={"white"} />
       </div>
       {cart.length !== 0 && <span
-        className="flex justify-center items-center absolute w-[16px] h-[16px] rounded-full bg-red-400 top-5 right-24 text-black font-bold text-sm select-none">
+        className="flex justify-center items-center absolute w-[16px] h-[16px] rounded-full bg-[#df2024] top-5 right-24 text-white font-bold text-sm select-none">
         {cart.length}
       </span>}
       <AnimatePresence>

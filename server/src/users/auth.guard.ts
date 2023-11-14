@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
       }
 
       const decodedToken = this.jwtService.verify(token);
-      req.userId = decodedToken.id; // Перевірте, як саме зберігається `userId` у вашому токені
+      req.userId = decodedToken.id;
 
       return true;
     } catch (e) {

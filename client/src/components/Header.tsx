@@ -1,16 +1,25 @@
 "use client";
 import Image from "next/image";
 import logo from "../../public/logo.svg";
-import { FiBell, FiSearch, FiShoppingCart } from "react-icons/fi";
+import { FiBell, FiSearch } from "react-icons/fi";
 import Link from "next/link";
 import UnderLineText from "@/components/UnderLineText";
 import Cart from "@/components/Cart";
-import { useState } from "react";
 import Tabs from "@/components/Tabs";
+import { useTypedSelector } from "@/redux/store";
+import { RxAvatar } from "react-icons/rx";
+import { useDispatch } from "react-redux";
+import { logOut } from "@/redux/slices/authSlice";
 
 
 const Header = () => {
+  const auth = useTypedSelector(x => x.auth);
+  const dispatch = useDispatch();
 
+  const handleLogOut = () => {
+    dispatch(logOut())
+    localStorage.removeItem('token');
+  }
 
   return (
     <nav
@@ -54,11 +63,23 @@ const Header = () => {
       </div>
       <div className="w-full flex justify-center items-center max-w-[300px]">
         <div>
-          <Link href={"/login"}>
-            <UnderLineText color="#94221a" height={2}>
-              <p>Log in</p>
-            </UnderLineText>
-          </Link>
+          {auth.isAuth ? <div className="flex items-center gap-x-4">
+            <RxAvatar size={35} />
+            <div className="flex flex-col">
+              <p className="text-white/60 font-semibold w-full max-w-[100px] truncate">{auth.user.email}</p>
+              <UnderLineText color="#94221a" height={2}>
+                <p onClick={handleLogOut} className="text-sm">Log out</p>
+                <div className="absolute -bottom-1 left-[1px] w-[95%] h-[1px] bg-[#ffffff] z-10" />
+              </UnderLineText>
+            </div>
+
+          </div> : (
+            <Link href={"/login"}>
+              <UnderLineText color="#94221a" height={2}>
+                <p>Log in</p>
+              </UnderLineText>
+            </Link>
+          )}
         </div>
       </div>
     </nav>
