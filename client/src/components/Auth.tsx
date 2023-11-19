@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { $axios } from "@/api/api";
-import { SERVER_URL } from "@/constants/url";
 import { UserApi } from "@/services/userApi";
 import { logIn } from "@/redux/slices/authSlice";
 import { AuthResponse } from "@/types/user";
