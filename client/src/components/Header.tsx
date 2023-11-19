@@ -17,9 +17,9 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    dispatch(logOut())
-    localStorage.removeItem('token');
-  }
+    dispatch(logOut());
+    localStorage.removeItem("token");
+  };
 
   return (
     <nav
@@ -67,10 +67,12 @@ const Header = () => {
             <RxAvatar size={35} />
             <div className="flex flex-col">
               <p className="text-white/60 font-semibold w-full max-w-[100px] truncate">{auth.user.email}</p>
-              <UnderLineText color="#94221a" height={2}>
-                <p onClick={handleLogOut} className="text-sm">Log out</p>
-                <div className="absolute -bottom-1 left-[1px] w-[95%] h-[1px] bg-[#ffffff] z-10" />
-              </UnderLineText>
+              <div className="w-fit">
+                <UnderLineText color="#94221a" height={2}>
+                  <p onClick={handleLogOut} className="text-sm w-fit">Log out</p>
+                  <div className="absolute -bottom-1 left-[1px] w-[95%] h-[1px] bg-[#ffffff] z-10" />
+                </UnderLineText>
+              </div>
             </div>
 
           </div> : (

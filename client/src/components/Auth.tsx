@@ -12,8 +12,10 @@ const Auth = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await UserApi.auth() as AuthResponse;
-      dispatch(logIn(data.user))
+      if (localStorage.getItem('token') !== undefined) {
+        const data = await UserApi.auth() as AuthResponse;
+        dispatch(logIn(data.user))
+      }
     }
 
     fetchData().catch(console.error);
