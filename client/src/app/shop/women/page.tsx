@@ -9,7 +9,7 @@ const Page = async () => {
 
   return (
     <div className="w-full h-full">
-      <div className="w-[90%] h-full flex flex-wrap pt-[80px] m-auto">
+      <div className="w-[90%] h-full flex flex-wrap pt-[80px] m-auto max-sm:justify-center">
         {data.map((item, i) => (
           <StoreBlock key={item.id} item={item} delay={0.5 + i * 0.1} />
         ))}

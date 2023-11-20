@@ -11,11 +11,14 @@ const links = [
   { href: "/mentors", label: "Mentors" }
 ];
 
+
 const Tabs = () => {
   const path = usePathname();
 
+  const classes = ['flex', 'gap-x-6', 'px-2'];
+
   return (
-    <div className={`flex gap-x-6 px-2`}>
+    <div className={classes.join(' ')}>
       {links.map(link => (
         <Link key={link.href} className="relative" href={link.href}>
           {((path.includes(link.href) && link.href !== '/') || (path === '/' && link.href === '/')) &&
