@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { Providers } from "@/redux/provider";
 import Auth from "@/components/Auth";
+import { Analytics } from '@vercel/analytics/react';
 
 
 const manrope = Manrope({ subsets: ["latin"] });
@@ -25,6 +26,7 @@ export default function RootLayout({
       <Auth />
       <Header />
       {children}
+      <Analytics />
     </Providers>
     </body>
     </html>
